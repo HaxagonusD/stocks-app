@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect, useState } from "react";
+import Stock from "./components/Stock";
+import Search from "./components/Search";
+/** @jsxImportSource @emotion/react */
+import tw from "twin.macro";
 
 function App() {
+  const [stocks, setStocks] = useState([]);
+  console.log(stocks);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      tw=" flex flex-col justify-center h-full bg-black text-white"
+      className="App"
+    >
+      <h1 tw="text-6xl font-bold">Stocks</h1>
+
+      {stocks.map((currentStock, index) => {
+        return <Stock {...currentStock} key={index} />;
+      })}
+
+      <Search stocks={stocks} setStocks={setStocks} />
     </div>
   );
 }
